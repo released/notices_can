@@ -2,9 +2,9 @@
 
 <a id="article_top"></a>
 
-# CAN / CAN FD 入門知識庫
+# CAN / CAN FD 知識庫
 
-> 面向初階讀者：先理解 CAN/CAN FD 在做什麼、frame 如何傳送，以及如何從線路與 controller 狀態判斷問題。最後更新：2026-07-12。
+> 整理 CAN / CAN FD 的用途、frame 傳輸、實體線路、controller 狀態與除錯資訊。最後更新：2026-07-12。
 
 ## 導覽
 
@@ -17,7 +17,7 @@
 - [CAN FD](#canfd)
 - [Controller Registers](#registers)
 - [工具與除錯](#debug)
-- [下一階：UDS](#next-uds)
+- [ISO-TP 與 UDS 的關聯](#next-uds)
 
 ---
 
@@ -186,7 +186,7 @@ Register 欄位常使用 value-minus-one encoding，例如設定 8 Tq 可能寫 
 
 1. 確認 CAN module clock 的實際頻率與來源。
 2. 找出符合目標 bit rate 的 BRP/TSEG 組合。
-3. 選擇適合網路長度與 oscillator tolerance 的 sample point。
+3. 選擇符合網路長度與 oscillator tolerance 的 sample point。
 4. 確認 SJW、TSEG2 與 controller legal range。
 5. 用 analyzer/oscilloscope 驗證，不只看計算結果。
 
@@ -240,7 +240,7 @@ CAN FD 的主要改進：
 
 - Data field 最多 64 bytes。
 - 可用 BRS 在 data phase 切換較高 bit rate。
-- 使用適合較長 payload 的 CRC 規則。
+- 使用對應較長 payload 的 CRC 規則。
 - Arbitration phase 仍需所有節點在 nominal bit rate 下協調。
 
 | DLC | 0–8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
@@ -299,7 +299,7 @@ flowchart TD
 
 ## 9. 工具與除錯流程
 
-### 9.1 建議工具
+### 9.1 工具
 
 - Multimeter：termination、short、supply。
 - Oscilloscope：CAN_H/CAN_L 波形、reflection、bit timing。
@@ -326,9 +326,9 @@ flowchart TD
 
 <a id="next-uds"></a>
 
-## 10. 下一階：ISO-TP 與 UDS
+## 10. ISO-TP 與 UDS 的關聯
 
-當你已能回答以下問題，就適合進入 UDS：
+UDS／ISO-TP 會使用以下 CAN / CAN FD 概念：
 
 - Standard/Extended ID 差在哪裡？
 - 為什麼數值較小的 ID 優先？
@@ -336,7 +336,7 @@ flowchart TD
 - ACK error 與 Bus-Off 代表什麼？
 - Classical CAN 與 CAN FD 的 payload/timing 差異？
 
-下一階會學習：
+協定層次關係：
 
 ```text
 CAN / CAN FD frame
@@ -358,12 +358,12 @@ ECU Bootloader firmware upgrade
 - [PEAK PCAN-View](https://www.peak-system.com/products/software/analysis-software/pcan-view/?L=1)：PCAN monitor、transmit、trace 與 CAN FD 支援。
 - [PEAK PCAN-Basic](https://www.peak-system.com/products/software/development-packages/pcan-basic/)：PCAN hardware 的 CAN/CAN FD programming API。
 
-本頁文字、表格與 Mermaid 圖均依教學順序重新撰寫／繪製，沒有複製上述網站段落或付費標準內容。ISO 頁面用於確認 scope 與版本；完整 normative requirements 仍須取得正式標準。
+本頁文字、表格與 Mermaid 圖均依本站內容架構重新撰寫／繪製，沒有複製上述網站段落或付費標準內容。ISO 頁面用於確認 scope 與版本；完整 normative requirements 仍須取得正式標準。
 
 ---
 
 ## English Summary
 
-This site introduces CAN and CAN FD from the physical bus through frames, arbitration, bit timing, error confinement, controller registers, and practical debugging. It intentionally stops before ISO-TP and UDS. Readers who understand these foundations can continue with the separate [UDS knowledge base](https://released.github.io/notices_can_uds/).
+This site covers CAN and CAN FD from the physical bus through frames, arbitration, bit timing, error confinement, controller registers, and practical debugging. ISO-TP and diagnostic-service material is collected in the separate [UDS knowledge base](https://released.github.io/notices_can_uds/).
 
 [回到頁首](#article_top)
