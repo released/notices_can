@@ -47,6 +47,15 @@ ol, ul { padding-left: 2em; }
 a { color: var(--link); text-decoration: none; }
 a:hover { color: #00a3f5; text-decoration: underline; }
 strong { color: #000; }
+.markdown-preview img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 960px);
+  height: auto;
+  margin: 1.25em auto;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
 hr { height: 4px; margin: 32px 0; border: 0; background: var(--line); }
 blockquote { margin-inline: 0; padding: 8px 15px; color: #555; background: #f0f0f0; border-left: 4px solid var(--accent); }
 blockquote > :last-child { margin-bottom: 0; }
