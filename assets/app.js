@@ -39,7 +39,9 @@
 
   function buildToc() {
     var fragment = document.createDocumentFragment();
-    content.querySelectorAll("h2, h3").forEach(function (heading) {
+    var pageTitle = content.querySelector("h1");
+    content.querySelectorAll("h1, h2, h3").forEach(function (heading) {
+      if (heading === pageTitle) { return; }
       var link = document.createElement("a");
       link.href = "#" + heading.id;
       link.textContent = heading.textContent;
@@ -98,7 +100,7 @@
         });
       }, Promise.resolve()).catch(function (error) {
         console.error("Mermaid render failed", error);
-        content.insertAdjacentHTML("afterbegin", '<p class="render-warning">部分流程圖無法繪製；正文與 command 表仍可正常閱讀。</p>');
+        content.insertAdjacentHTML("afterbegin", '<p class="render-warning">部分流程圖無法繪製；正文、圖片與連結仍可正常閱讀。</p>');
       });
     }
     return Promise.resolve();
@@ -113,7 +115,7 @@
         links.forEach(function (link) { link.classList.toggle("active", link.hash === "#" + entry.target.id); });
       });
     }, { rootMargin: "-15% 0px -75% 0px" });
-    content.querySelectorAll("h2, h3").forEach(function (heading) { observer.observe(heading); });
+    content.querySelectorAll("h1, h2, h3").forEach(function (heading) { observer.observe(heading); });
   }
 
   function scrollToInitialHash() {
