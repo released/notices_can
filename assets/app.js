@@ -148,6 +148,7 @@
     }
   });
   window.addEventListener("scroll", function () { backToTop.classList.toggle("visible", window.scrollY > 700); }, { passive: true });
+  toggleSidebar(window.innerWidth > 760);
 
   if (!window.marked) {
     content.innerHTML = '<p class="render-error">Markdown renderer 載入失敗。請直接閱讀 <a href="index.md">index.md</a>。</p>';
