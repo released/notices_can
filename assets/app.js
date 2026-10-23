@@ -155,7 +155,7 @@
     return;
   }
 
-  fetch("index.md", { cache: "no-cache" })
+  fetch(document.body.getAttribute("data-markdown") || "index.md", { cache: "no-cache" })
     .then(function (response) {
       if (!response.ok) { throw new Error("HTTP " + response.status); }
       return response.text();
@@ -169,6 +169,7 @@
     .then(function () {
       observeSections();
       scrollToInitialHash();
+      window.dispatchEvent(new Event("guide:ready"));
     })
     .catch(function (error) {
       content.innerHTML = '<p class="render-error">無法載入知識庫（' + error.message + '）。請直接閱讀 <a href="index.md">index.md</a>。</p>';
